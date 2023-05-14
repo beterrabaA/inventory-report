@@ -34,7 +34,7 @@ class SimpleReport:
                 item["data_de_validade"], "%Y-%m-%d"
             ).date()
             diferenca = abs(data_atual - data_validade).days
-            if diferenca_minima == None or diferenca < diferenca_minima:
+            if diferenca_minima is None or diferenca < diferenca_minima:
                 data_proxima = data_validade
                 diferenca_minima = diferenca
         return data_proxima
