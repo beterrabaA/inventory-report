@@ -17,13 +17,17 @@ class CompleteReport(SimpleReport):
     def get_stock_by_company(data):
         """Método que retorna os produtos estocados por empresa"""
         companies = []
+        tupled_companies = []
         for item in data:
             companies.append(item["nome_da_empresa"])
         companies = set(companies)
         stock_by_company = ""
         for company in companies:
             stock = CompleteReport.get_stock(data, company)
-            stock_by_company += f"- {company}: {stock}\n"
+            tupled_companies.append((company, stock))
+        tupled_companies.sort(key=lambda x: x[0])
+        for company in tupled_companies:
+            stock_by_company += f"- {company[0]}: {company[1]}\n"
         return stock_by_company
 
     @staticmethod
