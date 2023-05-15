@@ -13,35 +13,35 @@ class SimpleReport:
             f"Empresa com mais produtos: {SimpleReport.g_c_w_m_p(data)}"
         )
 
-    @classmethod
     # get_earliest_date
-    def g_e_d(cls, industry_data):
+    @staticmethod
+    def g_e_d(industry_data):
         """Método que retorna a data de fabricação mais antiga"""
         dates = []
         for item in industry_data:
             dates.append(item["data_de_fabricacao"])
         return min(dates)
 
-    @classmethod
     # get_nearest_date
-    def g_n_d(cls, date_data):
+    @staticmethod
+    def g_n_d(date_data):
         """Método que retorna a data de validade mais próxima"""
         data_atual = date.today()
         data_proxima = None
-        diferenca_minima = None
+        diferenca_minima = float('inf')
         for item in date_data:
             data_validade = datetime.strptime(
                 item["data_de_validade"], "%Y-%m-%d"
             ).date()
             diferenca = abs(data_atual - data_validade).days
-            if diferenca_minima is None or diferenca < diferenca_minima:
+            if diferenca < diferenca_minima:
                 data_proxima = data_validade
                 diferenca_minima = diferenca
         return data_proxima
 
-    @classmethod
     # get_company_with_most_products
-    def g_c_w_m_p(cls, company_data):
+    @staticmethod
+    def g_c_w_m_p(company_data):
         """Método que retorna a empresa com mais produtos"""
         companies = []
         for item in company_data:
